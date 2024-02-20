@@ -13,6 +13,6 @@ import java.util.List;
 public interface IQuestionRepository extends JpaRepository<Question, Integer> {
     List<Question> findByCategory(String category);
 
-    @Query(value = "SELECT * FROM question q WHERE q.category=:category ORDER BY RANDOM() LIMIT :size", nativeQuery = true)
-    List<Question> getQuestionsByCategory(String category, int size);
+    @Query(value = "SELECT q.id FROM question q WHERE q.category=:category ORDER BY RANDOM() LIMIT :size", nativeQuery = true)
+    List<Integer> getQuestionsByCategory(String category, int size);
 }
