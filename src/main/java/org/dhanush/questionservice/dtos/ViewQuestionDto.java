@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class ViewQuestionDto {
     private int id;
+    private String questionTitle;
     private String option1;
     private String option2;
     private String option3;
