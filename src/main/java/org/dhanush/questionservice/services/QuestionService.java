@@ -3,6 +3,7 @@ package org.dhanush.questionservice.services;
 import jakarta.transaction.Transactional;
 import org.dhanush.questionservice.dtos.ViewQuestionDto;
 import org.dhanush.questionservice.entites.Question;
+import org.dhanush.questionservice.entites.Response;
 import org.dhanush.questionservice.repositories.IQuestionRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -72,5 +73,17 @@ public class QuestionService {
             List<ViewQuestionDto> questionDtos = modelMapper.map(questions,new TypeToken<List<ViewQuestionDto>>(){}.getType());
             return new ResponseEntity<>(questionDtos,HttpStatus.OK);
 
+    }
+
+    public ResponseEntity<Integer> getScore(List<Response> responses) {
+
+        int correct = 0;
+        for (Response response:responses){
+            Question question = questionRepository.findById(response.getId()).get();
+            if (response.getResponse().equals(question.getRightAnswer())){
+                correct++;
+            }
+        }
+        return new ResponseEntity<>(correct,HttpStatus.OK);
     }
 }

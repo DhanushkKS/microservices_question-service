@@ -3,6 +3,7 @@ package org.dhanush.questionservice.controllers;
 
 import org.dhanush.questionservice.dtos.ViewQuestionDto;
 import org.dhanush.questionservice.entites.Question;
+import org.dhanush.questionservice.entites.Response;
 import org.dhanush.questionservice.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +53,10 @@ public class QuestionController {
         return questionService.getQuestionsFromId(questionIds);
     }
     //calculate answeres
+    @PostMapping("getScore")
+    public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses){
+        return questionService.getScore(responses);
+    }
 
 
 }
